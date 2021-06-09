@@ -1,0 +1,63 @@
+<div class="container">
+  <h2 style="margin-top: 20px;margin-bottom: 20px;"> Add article</h2>
+  <form [formGroup]="articleForm" (ngSubmit)="addNewArticle()">
+    <div class="mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text"
+             class="form-control"
+             id="titleInput"
+             formControlName="title"
+             [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+             placeholder="Article Title">
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Title cannot be empty</div>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <label for="content" class="form-label">Excerpt</label>
+      <textarea class="form-control"
+                id="content"
+                rows="3"
+                formControlName="content"
+                [ngClass]="{ 'is-invalid': submitted && f.content.errors }"
+                placeholder="Write something">
+      </textarea>
+      <div *ngIf="submitted && f.content.errors" class="invalid-feedback">
+        <div *ngIf="f.content.errors.required">Content cannot be empty</div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="selectedDate" class="form-label">Date</label>
+      <input type="date"
+             class="form-control"
+             id="dateInput"
+             formControlName="selectedDate"
+             [ngClass]="{ 'is-invalid': submitted && f.selectedDate.errors }"
+             style="width: 20%;">
+      <div *ngIf="submitted && f.selectedDate.errors" class="invalid-feedback">
+        <div *ngIf="f.selectedDate.errors.required">Choose any date</div>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-primary" (click)='addNewArticle()'>Add article</button>
+    </div>
+  </form>
+  <hr>
+  <div>
+
+    <h2>Article List</h2>
+    <div *ngIf="articleList.length > 0 ; else noArticle">
+      <app-article *ngFor="let ttl of articleList" [id]="ttl.id" [title]="ttl.title" [excerpt]="ttl.content"
+        [publishedDate]="ttl.date">
+      </app-article>
+    </div>
+
+    <ng-template #noArticle>
+      No added article
+    </ng-template>
+
+  </div>
+</div>

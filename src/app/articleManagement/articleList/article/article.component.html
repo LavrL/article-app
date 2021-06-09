@@ -1,0 +1,13 @@
+<div style="border:1px solid black; margin-bottom: 5px;" (click)="showHide = !showHide">
+  <div class="card">
+    <div class="card-body">
+      {{title}}
+    </div>
+    <div class="card-body" *ngIf="showHide">
+      {{excerpt}}
+    </div>
+    <div class="card-body" *ngIf="showHide">
+      Published: {{publishedDate | date: 'mediumDate'}}
+    </div>
+  </div>
+</div>
