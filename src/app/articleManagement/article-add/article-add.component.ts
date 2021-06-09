@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-article-add',
-  templateUrl: './article-add.component.html'
+  templateUrl: './article-add.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleAddComponent implements OnInit {
   public postTitle: string;
