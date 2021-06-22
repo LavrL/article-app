@@ -14,14 +14,13 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent
   ],
   imports: [
-    FormsModule,
+    //FormsModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    ArticleRoutingModule,
+    //ArticleRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
