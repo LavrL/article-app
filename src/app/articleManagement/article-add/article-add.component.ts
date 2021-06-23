@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArticleService } from 'src/app/shared/article.service';
 
 @Component({
   selector: 'app-article-add',
@@ -11,7 +12,7 @@ export class ArticleAddComponent implements OnInit {
   public postContent: string;
   public postDate: Date;
   public postId = 0;
-  public articleList = [];
+
   public clickedID: string;
   public articleForm: FormGroup;
   public submitted = false;
@@ -32,13 +33,13 @@ export class ArticleAddComponent implements OnInit {
         content: this.articleForm.controls.content.value,
         date: this.articleForm.controls.selectedDate.value
       };
-      this.articleList.push(cont);
+      this.article.articleList.push(cont);
       this.submitted = false;
       this.articleForm.reset();
     }
   }
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, public article: ArticleService) { }
 
   ngOnInit(): void {
     this.articleForm = this.formBuilder.group({

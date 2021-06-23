@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ArticleService } from '../shared/article.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, public articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -27,9 +28,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.loginForm.controls['email'].value === 'test@test.com' && this.loginForm.controls['password'].value === '1234') {
+    if (this.articleService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value)) {
       this.router.navigate(['/addArticle']);
+      this.articleService.loggedIn = true;
     } else {
+      this.articleService.loggedIn = false;
       this.credentialsValid = false;
     }
   }
